@@ -292,6 +292,11 @@ final class PathMatcher: ObservableObject {
 		}
 
 		var parameterValues: [String : String] = [:]
+        if let components = URLComponents(string: path) {
+            _ = components.queryItems?.compactMap({ item in
+                parameterValues[item.name] = item.value
+            })
+        }
 
 		if !compiled.parameters.isEmpty {
 			for variable in compiled.parameters {
