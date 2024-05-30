@@ -243,13 +243,13 @@ final class PathMatcher: ObservableObject {
 			if let range = Range(match.range(at: 1), in: glob) {
 				let variable = String(glob[range])
 
-				// #if DEBUG
+				#if DEBUG
 				// In debug mode perform an extra check whether parameters contain invalid characters or
 				// whether the parameters starts with something besides a letter.
 				if let r = variable.range(of: "(^[^a-z]|[^a-z0-9])", options: [.regularExpression, .caseInsensitive]) {
 					throw CompileError.badParameter(variable, culprit: String(variable[r]))
 				}
-				// #endif
+				#endif
 				
 				variables.insert(variable)
 			}
